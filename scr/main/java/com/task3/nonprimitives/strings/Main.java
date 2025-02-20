@@ -11,29 +11,37 @@ public class Main {
         task4();
     }
 
-    public static void task1(){
+    public static void task1() {
         /*
         Напишите программу, которая выводит часть строки до первой встреченной точки, включая точку.
         Также предусмотрите вывод количества пробелов.
          */
         String str1 = "Hi, my name is Kate. I was born in Lozova.";
-        int strIndex = str1.indexOf(" I");
-        str1 = str1.substring(0,strIndex);
+        int strIndex = str1.indexOf(".");
+        str1 = str1.substring(0, strIndex + 1);
+        String[] words = str1.split(" ");
         System.out.println(str1);
+        System.out.println("Number of spaces: " + (words.length - 1));
     }
 
-    public static void task2(){
+    public static void task2() {
         //Дана строка. Вывести первый, последний и средний (если он есть) символы.
         String str1 = "Hi, my name is Kate. I was born in Lozova.";
         char firstSymbol = str1.charAt(0);
-        char middleSymbol = str1.charAt(10);
-        char lastSymbol = str1.charAt(str1.length()-1);
+        int l = str1.length()/2;
+        char middleSymbol = str1.charAt(l);
+        char lastSymbol = str1.charAt(str1.length() - 1);
         System.out.println(firstSymbol);
-        System.out.println(middleSymbol);
         System.out.println(lastSymbol);
+        if (str1.length() > 2) {
+            System.out.println(middleSymbol);
+        }
+        else {
+            System.out.println("Середній символ відсутній");
+        }
     }
 
-    public static void task3(){
+    public static void task3() {
         /*
         Найти в строке указанную подстроку и заменить ее на новую.
         Строку, ее подстроку для замены и новую подстроку вводит пользователь
@@ -46,11 +54,11 @@ public class Main {
         String userWordToChange = scan.nextLine();
         System.out.println("Can you specify the word to replace it with:");
         String userWordForReplacement = scan.nextLine();
-        String newUserInput = userInput.replace(userWordToChange,userWordForReplacement);
+        String newUserInput = userInput.replace(userWordToChange, userWordForReplacement);
         System.out.println("Here is the result: " + newUserInput);
     }
 
-    public static void task4(){
+    public static void task4() {
         /*
         Вводится строка слов, разделенных пробелами.
         Найти самое длинное слово и вывести его на экран.
