@@ -8,12 +8,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        task1_initializeArray();
+        firstTaskInitializeArray();
         task2();
         task3();
         task4();
         task5();
+        fifthTaskNewApproach();
     }
+
     /*
     Максимальное среди массива на 20 чисел
     1. В методе initializeArray():
@@ -21,7 +23,7 @@ public class Main {
     1.2. Считайте с консоли 20 чисел и заполните ими массив
     2. Метод max(int[] array) должен находить максимальное число из элементов массива
      */
-    public static void task1_initializeArray() {
+    public static void firstTaskInitializeArray() {
         System.out.print("Введіть 20 будь-яких цілих чисел: ");
         Scanner scan = new Scanner(System.in);
         int[] array = new int[20];
@@ -71,8 +73,8 @@ public class Main {
     public static void task3() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введіть 10 будь-яких рядків: ");
-        String[] arrayStrings = new String[3];
-        int[] arrayNumbers = new int[3];
+        String[] arrayStrings = new String[10];
+        int[] arrayNumbers = new int[10];
         for (int i = 0; i < arrayStrings.length; i++) {
             arrayStrings[i] = reader.readLine();
         }
@@ -115,8 +117,8 @@ public class Main {
      */
     public static void task5() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введіть 10 будь-яких цілих чисел: ");
-        int[] bigArray = new int[6];
+        System.out.println("Введіть 20 будь-яких цілих чисел: ");
+        int[] bigArray = new int[20];
         for (int i = 0; i < bigArray.length; i++) {
             bigArray[i] = Integer.parseInt(reader.readLine());
         }
@@ -126,6 +128,26 @@ public class Main {
         int[] smallArray2 = Arrays.copyOfRange(bigArray, arrayMid, bigArray.length);
         for (int j : smallArray2) {
             System.out.println(j);
+        }
+    }
+
+    public static void fifthTaskNewApproach() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введіть 20 будь-яких цілих чисел: ");
+        int[] bigArray = new int[20];
+        int[] smallArray1 = new int[10];
+        int[] smallArray2 = new int[10];
+
+        for (int i = 0; i < bigArray.length; i++) {
+            bigArray[i] = Integer.parseInt(reader.readLine());
+            if (i < smallArray1.length) {
+                smallArray1[i] = bigArray[i];
+            } else {
+                smallArray2[i - smallArray2.length] = bigArray[i];
+            }
+        }
+        for (int i : smallArray2) {
+            System.out.println(i);
         }
     }
 }
