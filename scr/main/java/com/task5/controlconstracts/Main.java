@@ -10,6 +10,7 @@ public class Main {
         task1();
         task2();
         task3();
+        task3SecondApproach();
         task4();
         task5();
         task6();
@@ -91,6 +92,27 @@ public class Main {
         }
     }
 
+    public static void task3SecondApproach() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введіть три числа: ");
+        int[] numbers = new int[3];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = Integer.parseInt(reader.readLine());
+        }
+        for (int i = 0; i < numbers.length - 1; i++) {
+            for (int k = i + 1; k < numbers.length; k++) {
+                if (numbers[i] < numbers[k]) {
+                    int temp = numbers[i];
+                    numbers[i] = numbers[k];
+                    numbers[k] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println(numbers[i]);
+        }
+    }
+
     public static int maxArrayElement(int[] array) {
         int max = array[0];
         for (int i = 0; i < array.length; i++) {
@@ -165,22 +187,23 @@ public class Main {
     public static void task7() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Random random = new Random();
-        int secret;
-        secret = random.nextInt(20 + 1);
+        int secretNumber;
+        secretNumber = random.nextInt(20 + 1);
+        int number = 1;
         System.out.println("Вгадайте число за 7 спроб: ");
-        for (int i = 1; i <= 7; i++) {
+        while (number <= 7) {
             int userNumber = Integer.parseInt(reader.readLine());
-            if (userNumber > secret && i < 7) {
-                System.out.println("Много");
-            } else if (userNumber < secret && i < 7) {
-                System.out.println("Мало");
-            } else if (userNumber == secret) {
+            if (userNumber == secretNumber) {
                 System.out.println("Угадал :)");
                 break;
-            } else {
+            } else if (number == 7) {
                 System.out.println("Не угадал :(");
-                break;
+            } else if (userNumber < secretNumber) {
+                System.out.println("Мало");
+            } else {
+                System.out.println("Много");
             }
+            number++;
         }
     }
 
