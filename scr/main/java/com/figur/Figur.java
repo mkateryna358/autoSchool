@@ -18,22 +18,6 @@ public abstract class Figur {
         return name;
     }
 
-    public static String generateRandomString(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        StringBuilder sb = new StringBuilder(length);
-
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            sb.append(characters.charAt(randomIndex));
-        }
-        return sb.toString();
-    }
-
-    public String setRandomName() {
-        this.name = generateRandomString(4);
-        return name;
-    }
-
     public abstract void setRandomFiguresParameter();
 
     public void setCoordinates() {
@@ -53,4 +37,8 @@ public abstract class Figur {
         System.out.println("Координати фігури: " + Arrays.toString(getCoordinates()) + " ");
     }
 
+    public void setFigurParameters() {
+        setRandomFiguresParameter();
+        setCoordinates();
+    }
 }
