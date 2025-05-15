@@ -11,18 +11,19 @@ public class Main {
 
         for (int i = 0; i < figures.length; i++) {
             int figurType = random.nextInt(3);
-            if (figurType == 0) {
-                figures[i] = new Circle();
-                figures[i].setRandomFiguresParameter();
-                figures[i].setCoordinates();
-            } else if (figurType == 1) {
-                figures[i] = new Triangle();
-                figures[i].setRandomFiguresParameter();
-                figures[i].setCoordinates();
-            } else {
-                figures[i] = new Square();
-                figures[i].setRandomFiguresParameter();
-                figures[i].setCoordinates();
+            switch (figurType) {
+                case 0 -> {
+                    figures[i] = new Circle();
+                    figures[i].setFigurParameters();
+                }
+                case 1 -> {
+                    figures[i] = new Triangle();
+                    figures[i].setFigurParameters();
+                }
+                case 2 -> {
+                    figures[i] = new Square();
+                    figures[i].setFigurParameters();
+                }
             }
         }
 
@@ -44,6 +45,5 @@ public class Main {
         for (Figur f : figures) {
             f.printFigursElements();
         }
-
     }
 }

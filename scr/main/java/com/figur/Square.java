@@ -14,7 +14,6 @@ public class Square extends Figur {
 
     @Override
     public double getArea() {
-        double area = Math.round(length * length * 10.0) / 10.0;  //отут можна покращити формулу, зробити в квадраті
-        return area;
+        return Math.round(length * length * 10.0) / 10.0;
     }
 }
