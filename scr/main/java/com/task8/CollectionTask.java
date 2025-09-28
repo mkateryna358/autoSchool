@@ -20,11 +20,13 @@ public class CollectionTask {
         task7();
         task8();
         task9();
+        task9Variant2();
         task10();
         task11();
         task12();
         task13();
         task14();
+        task14variant2();
         task15();
         task16();
         task17();
@@ -153,8 +155,7 @@ public class CollectionTask {
         listOfStrings.put("banana", "fruit");
 
         for (Map.Entry<String, String> pair : listOfStrings.entrySet()) {
-            String value = pair.getValue();
-            System.out.println(value);
+            System.out.println(pair.getValue());
         }
     }
 
@@ -281,6 +282,44 @@ public class CollectionTask {
         }
     }
 
+    public static void task9Variant2() throws IOException {
+        /*
+        The Shortest line
+        1. Create a list of strings.
+        2. Read 5 strings from the keyboard and add them to the list.
+        3. Using a loop, find the shortest string in the list.
+        4. Display the found string on the screen.
+        5. If there are several such lines, print each line from a new line
+         */
+        ArrayList<String> listOfStrings = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter 5 strings and press enter when finish");
+
+        for (int i = 0; i < 5; i++) {
+            String s = reader.readLine();
+            listOfStrings.add(s);
+        }
+        //Found the line with min length
+        int minLengh = listOfStrings.get(0).length();
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            int size = listOfStrings.get(i).length();
+            if (size < minLengh) {
+                minLengh = size;
+            }
+        }
+        //Lines with min length are added to separate list listOfShortestStrings
+        List<String> listOfShortestStrings = new ArrayList<>();
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).length() == minLengh) {
+                listOfShortestStrings.add(listOfStrings.get(i));
+            }
+        }
+        //Print each line from a new line
+        for (String listOfShortestString : listOfShortestStrings) {
+            System.out.println(listOfShortestString);
+        }
+    }
+
     public static void task10() throws IOException {
         /*
         Task 10. 10 lines to the top of the list
@@ -290,17 +329,6 @@ public class CollectionTask {
          */
         ArrayList<String> listOfStrings = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        listOfStrings.add("potato");
-        listOfStrings.add("pepper");
-        listOfStrings.add("rose");
-        listOfStrings.add("dog");
-        listOfStrings.add("cat");
-
-        System.out.println("Some existing lines: ");
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            System.out.println(listOfStrings.get(i));
-        }
 
         System.out.println("Enter new 10 lines: ");
         while (true) {
@@ -333,7 +361,7 @@ public class CollectionTask {
         }
         System.out.println("рядки до перестановки: " + listOfStrings);
         for (int i = 0; i < 13; i++) {
-            String removedElement = listOfStrings.remove(4);
+            String removedElement = listOfStrings.remove(listOfStrings.size() - 1);
             listOfStrings.add(0, removedElement);
         }
         System.out.println("рядки після перестановки: " + listOfStrings);
@@ -426,6 +454,50 @@ public class CollectionTask {
         }
         return count;
     }
+
+    public static void task14variant2() {
+        /*
+        Create a dictionary (Map<String, String>) with ten entries
+        according to the principle "Last Name" - "First Name".
+        Check how many people have the same first or last name as the given one.
+         */
+        Map<String, String> personalInfo = new HashMap<>();
+        personalInfo.put("Smith", "John");
+        personalInfo.put("Doe", "Jane");
+        personalInfo.put("Johnson", "John");
+        personalInfo.put("Williams", "Emily");
+        personalInfo.put("Brown", "Michael");
+        personalInfo.put("Davis", "Jane");
+        personalInfo.put("Miller", "Sarah");
+        personalInfo.put("Wilson", "John");
+        personalInfo.put("Moore", "Jessica");
+        personalInfo.put("Taylor", "Michael");
+
+        Map<String, Integer> namesCounts = new HashMap<>();
+        List<String> listOfNames = new ArrayList<>(personalInfo.values());
+        for (int i = 0; i < listOfNames.size(); i++) {
+            String name = listOfNames.get(i);
+            if (namesCounts.containsKey(name)) {
+                namesCounts.put(name, namesCounts.get(name) + 1);
+            } else {
+                namesCounts.put(name, 1);
+            }
+        }
+        System.out.println("John name count: " + namesCounts.get("John"));
+
+        Map<String, Integer> keysCounts = new HashMap<>();
+        List<String> listOfKeys = new ArrayList<>(personalInfo.keySet());
+        for (int i = 0; i < listOfKeys.size(); i++) {
+            String key = listOfKeys.get(i);
+            if (keysCounts.containsKey(key)) {
+                keysCounts.put(key, keysCounts.get(key) + 1);
+            } else {
+                keysCounts.put(key, 1);
+            }
+        }
+        System.out.println("Johnson name count: " + keysCounts.get("Johnson"));
+    }
+
 
     public static int getSameKeys(String key, Map map) {
         int count = 0;
