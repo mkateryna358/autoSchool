@@ -13,16 +13,26 @@ public class Program {
         in the successor class and output to the console.
          */
 
-        Students students = new Students();
-        Program.populateData(students);
-        students.printData();
+        System.out.println("-----populateDataOnlyForDeclaredFields-----");
+        Student student1 = new Student();
+        Program.populateDataOnlyForDeclaredFields(student1);
+        student1.printData();
 
-        Teachers teachers = new Teachers();
-        Program.populateData(teachers);
-        teachers.printData();
+        Teacher teacher1 = new Teacher();
+        Program.populateDataOnlyForDeclaredFields(teacher1);
+        teacher1.printData();
+
+        System.out.println("-----populateDataForAllAvailableFields-----");
+        Student student2 = new Student();
+        Program.populateDataForAllAvailableFields(student2);
+        student2.printData();
+
+        Teacher teacher2 = new Teacher();
+        Program.populateDataForAllAvailableFields(teacher2);
+        teacher2.printData();
     }
 
-    public static void populateData(Object obj) throws NoSuchFieldException, IllegalAccessException {
+    public static void populateDataOnlyForDeclaredFields(Object obj) throws NoSuchFieldException, IllegalAccessException {
 
         Field field1 = obj.getClass().getDeclaredField("name");
         field1.setAccessible(true);
@@ -31,6 +41,14 @@ public class Program {
         Field field2 = obj.getClass().getDeclaredField("lastName");
         field2.setAccessible(true);
         field2.set(obj, generateRandomString(7));
+    }
+
+    public static void populateDataForAllAvailableFields(Object obj) throws IllegalAccessException {
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            field.set(obj, generateRandomString(7));
+        }
     }
 
     public static String generateRandomString(int length) {
